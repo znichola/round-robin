@@ -80,6 +80,19 @@ export class Match {
   }
 
   /**
+   *
+   * @param {number} id - Player ID to look for
+   * @returns {Player} - Player object, will throw if not found.
+   */
+  getPlayerById(id) {
+    const player = this.players.find((player) => player.id === id);
+    if (player === undefined) {
+      throw new Error(`Player with ID ${id} not found`);
+    }
+    return player;
+  }
+
+  /**
    * Remove a player from the list
    * @param {number} playerId - Id of player to remove
    * Removes the player from the list, does not modify played games.
@@ -93,15 +106,25 @@ export class Match {
   }
 
   /**
-   * Adds a match result between two players.
-   * @param {Player} p1 - The first player.
-   * @param {Player} p2 - The second player.
+   * Adds a game result between two players. Overrights any existing game.
+   * @param {number} p1Id - The first player ID.
+   * @param {number} p2Id - The second player ID.
    * @param {number} p1Score - The score of the first player.
    * @param {number} p2Score - The score of the second player.
+   * @returns {Game} - The created game
    */
-  addGame(p1, p2, p1Score, p2Score) {
+  addGame(p1Id, p2Id, p1Score, p2Score) {
+    const p1 = this.getPlayerById(Number(p1Id));
+    const p2 = this.getPlayerById(Number(p2Id));
+    const existingGame = this.games.findIndex(
+      (game) => game.p1.id === p1Id || game.p2.id === p2Id
+    );
+    if (existingGame != -1) {
+      this.games.splice(existingGame, 1);
+    }
     const game = new Game(p1, p2, p1Score, p2Score);
     this.games.push(game);
+    return game;
   }
 
   /**
