@@ -6,9 +6,9 @@ Built using [htmx](https://htmx.org/) an [expressjs](https://expressjs.com/) ser
 
 ## TODO
 
-- [ ] decide on datastructure
+- [x] decide on datastructure
 - [ ] flat file database parsing, it's an event log
 - [ ] render table from data
-- [ ] make endpoint to add a player to the match
-- [ ] make endpoint to add result to log
-- [ ] make endpoint to clear the match
+- [x] make endpoint to add a player to the match
+- [x] make endpoint to add result to log
+- [x] make endpoint to clear the match

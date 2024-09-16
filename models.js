@@ -128,6 +128,22 @@ export class Match {
   }
 
   /**
+   * 
+   * @param {p1Id} p1Id - Player 1 Id
+   * @param {p2Id} p2Id - Player 3 Id
+   * @returns {Game | undefined} - Game between players or undefined.
+   */
+  getGame(p1Id, p2Id) {
+    const game = this.games.find(
+      (game) => (game.p1.id === p1Id && game.p2.id === p2Id) || (game.p1.id === p2Id && game.p2.id === p1Id)
+    );
+    // if (game === undefined) {
+    //   throw Error(`Game between ${p1Id} and ${p2Id} not found`);
+    // }
+    return game;
+  }
+
+  /**
    * Get all games of a player.
    * @param {Player} player - The player whose games to retrieve.
    * @returns {Game[]} The games of the given player.
