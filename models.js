@@ -8,10 +8,15 @@ export class Player {
 
   /**
    * @param {string} name - The name of the player.
+   * @param {number} id - Optional, if given id will be this
    */
-  constructor(name) {
+  constructor(name, id) {
     /** @type {number} */
-    this.id = Player.idCounter++; // Assign a unique ID and increment the counter
+    this.id = id || Player.idCounter++;
+
+    if (id) {
+      Player.idCounter = id + 1;
+    }
 
     /** @type {string} */
     this.name = name;
@@ -51,13 +56,14 @@ export class Game {
 export class Match {
   /**
    * @param {Player[]} players - The list of players participating in the tournament.
+   * @param {Game[]} games - Optional, a list of games played.
    */
-  constructor(players) {
+  constructor(players, games) {
     /** @type {Player[]} */
     this.players = players;
 
     /** @type {Game[]} */
-    this.games = [];
+    this.games = games || [];
   }
 
   /**
