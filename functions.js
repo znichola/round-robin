@@ -9,7 +9,7 @@ import { readFileSync, writeFileSync } from "fs";
 export function getTable(match) {
   let ret = `<table><thead><tr><th></th>`;
   for (const player of match.players) {
-    ret += `<th class="rotate"><div><span>${player.name}</span></div></th>`;
+    ret += `<th class="rotate">${player.name}</th>`;
   }
   ret += "</tr></thead> <tbody>";
   for (const playerRow of match.players) {

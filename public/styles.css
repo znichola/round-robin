@@ -18,35 +18,50 @@ body {
   padding: 20px;
 }
 
-h1 {
-  text-align: center;
+h1,
+h2 {
   color: #333;
 }
 
 h1 {
+  text-align: center;
   font-size: 2em;
-  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 1.2em;
+  margin: 0 0 1.5rem;
+}
+
+.center {
+  margin: 0 auto 30px;
+}
+
+.flex-stuff {
+  display: flex;
+  gap: 20px;
+  flex-flow: wrap;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .card {
   background-color: #fff;
   padding: 6px;
-  margin-bottom: 20px;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* margin: 0 auto 20px; */
+  width: fit-content;
 }
 
+
+
 /* Form styling */
-form {
+form.card {
   background-color: #fff;
   padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   max-width: 400px;
-  margin: 0 auto 20px;
+  min-width: 300px;
 }
 
 label {
@@ -117,14 +132,8 @@ thead tr {
 }
 
 th.rotate {
-  height: 140px;
-  white-space: nowrap;
-  width: 25px;
-
-  > div {
-    transform: translate(0%, 45px) rotate(-90deg);
-    width: 25px;
-  }
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
 }
 
 table tr:hover {
