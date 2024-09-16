@@ -1,56 +1,136 @@
+/* General styling */
+:root {
+  --col-main: rgb(196 27 27);
+  --col-main2: rgb(203, 72, 72);
+  --col-main3: rgb(250, 188, 188);
+}
+
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background-color: #f4f4f4;
+  margin: 0;
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+}
+
+h1, h2 {
+  text-align: center;
+  color: #333;
 }
 
 h1 {
-  text-align: center;
-  color: rgb(196 27 27);
+  font-size: 2em;
+  margin-bottom: 20px;
 }
 
-* {
-  margin: 0;
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
 }
 
-input,
-button,
-textarea,
-select {
-  font: inherit;
+.card {
+  /* background-color: #fff; */
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* margin: 0 auto 20px; */
 }
 
-*,
-*::before,
-*::after {
+/* Form styling */
+form {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto 20px;
+}
+
+label {
+  display: block;
+  font-size: 1em;
+  margin-bottom: 5px;
+}
+
+select,
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
   box-sizing: border-box;
 }
 
-table {
-	border-collapse: collapse;
-}
-table td {
-	padding: 15px;
-}
-table thead td {
-	background-color: #54585d;
-	color: #ffffff;
-	font-weight: bold;
-	font-size: 13px;
-	border: 1px solid #54585d;
-}
-table tbody td {
-	color: #636363;
-	border: 1px solid #dddfe1;
-}
-table tbody tr {
-	background-color: #f9fafb;
-}
-table tbody tr:nth-child(odd) {
-	background-color: #ffffff;
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: var(--col-main);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
 }
 
+button[type="submit"]:hover {
+  background-color: var(--col-main2);
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1em;
+  text-align: left;
+  overflow: hidden;
+  position: relative;
+  background-color: #dddddd;
+  z-index: 0;
+}
+
+table th,
+table td {
+  padding: 12px 15px;
+  border: 3px solid white;
+}
+
+table th {
+  background-color: var(--col-main);
+  color: white;
+}
+
+table tr:hover {
+  background-color: var(--col-main3);
+}
+
+table td {
+  text-align: center;
+}
+
+td, th {
+  position: relative;
+}
+
+td:hover::after {
+  content: "";
+  position: absolute;
+  background-color: var(--col-main3);
+  left: 0;
+  top: -5000px;
+  height: 10000px;
+  width: 100%;
+  z-index: -1;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  form, table {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

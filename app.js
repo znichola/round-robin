@@ -1,17 +1,24 @@
 import express from "express";
 import path from "path";
 import { Player, Game, Match } from "./models.js";
-import { getTable, loadMatch, saveMatch } from "./functions.js";
+import { getPlayers, getTable, loadMatch, saveMatch } from "./functions.js";
 import { readFileSync, writeFileSync, writeSync } from "fs";
 
 const app = express();
 const port = 5555;
 const saveFile = "save.json";
+const homeTemplate = "public/index.html";
 
+console.log("Loading match data from:", saveFile);
 let match = loadMatch(saveFile);
-console.log("Loading match data from:". saveFile);
-const homeHTML = readFileSync("public/index.html", 'utf8');
 
+console.log("Loaidng home template from:", homeTemplate);
+const homeHTML = readFileSync(homeTemplate, 'utf8');
+
+// To parse application/x-www-form-urlencoded form data
+app.use(express.urlencoded({ extended: true }));
+
+// And handle JSON data too:
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -43,10 +50,16 @@ app.get("/api/player", (req, res) => {
 });
 
 app.post("/api/player", (req, res) => {
-  res.json({
-    message: "Sucess, player added",
-    player: match.addPlayer(req.query.name),
-  });
+  // Check for form data in req.body or query data in req.query
+  const playerName = req.body.name || req.query.name;
+
+  if (!playerName) {
+    return res.status(400).json({ message: "Player name is required" });
+  }
+  const player = match.addPlayer(playerName);
+
+  // Sucess redirect to the original page, so it's 
+  res.redirect('back');
 });
 
 app.delete("/api/player/:id", (req, res) => {
@@ -63,16 +76,31 @@ app.get("/api/game", (req, res) => {
 });
 
 app.post("/api/game", (req, res) => {
+  // Check for form data in req.body or query data in req.query
+  const p1Id = req.body.p1Id || req.query.p1Id;
+  const p2Id = req.body.p2Id || req.query.p2Id;
+  const outcome = req.body.outcome || req.query.outcome;
+  let p1Score = req.body.p1Score || req.query.p1Score;
+  let p2Score = req.body.p2Score || req.query.p2Score;
+
+  if (outcome === "draw") {
+    p1Score = "0.5";
+    p2Score = "0.5";
+  } else if (outcome === "p1win") {
+    p1Score = "1";
+    p2Score = "0";
+  } else if (outcome === "p2win") {
+    p1Score = "0";
+    p2Score = "1";
+  }
+
+  if (!p1Id || !p2Id || !p1Score || !p2Score ) {
+    return res.status(400).json({ message: `Missing information p1Id=${p1Id} p2Id=${p2Id} (p1Score=${p1Score} & p2Score=${p2Score} or outcome=${outcome})`});
+  }
+
   try {
-    res.json({
-      message: "Sucess, game added",
-      game: match.addGame(
-        req.query.p1Id,
-        req.query.p2Id,
-        req.query.p1Score,
-        req.query.p2Score
-      ),
-    });
+    match.addGame(p1Id, p2Id, p1Score, p2Score);
+    res.redirect("back");
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -96,7 +124,10 @@ app.get("/", (req, res) => {
     res.status(500).json({ message: "Match data is undefined." });
     return;
   }
-  const html = homeHTML.replace("<!-- TABLE -->", getTable(match));
+  const homeHTML = readFileSync(homeTemplate, 'utf8'); // added only for testing
+  let html = homeHTML.replace("<!-- TABLE -->", getTable(match));
+  const players = getPlayers(match);
+  html = html.replaceAll("<!-- PLAYERS -->", players);
   res.send(html);
 });
 
@@ -110,5 +141,5 @@ app.use((req, res, next) => {
 
 // listen with app on the port
 app.listen(port, () => {
-  console.log(`Running on localhost:${port}`);
+  console.log(`\nRunning on http://localhost:${port}`);
 });

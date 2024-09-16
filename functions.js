@@ -37,6 +37,19 @@ export function getTable(match) {
 
 /**
  * 
+ * @param {Match} match - Match object
+ * @returns {string} - List of players as option for form
+ */
+export function getPlayers(match) {
+  let ret = "";
+  for (const player of match.players) {
+    ret += `<option value="${player.id}">${player.name}</option>`;
+  }
+  return ret;
+}
+
+/**
+ * 
  * @param {string} file - File path
  * @returns {Match} - Match object
  */

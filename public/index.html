@@ -8,6 +8,45 @@
   </head>
   <body>
     <h1>Scibeta chess tournament</h1>
-    <!-- TABLE -->
+    <div class="card">
+      <!-- TABLE -->
+    </div>
+
+    <!-- Add Player Form -->
+
+    <form id="addPlayerForm" action="/api/player" method="POST">
+      <h3>Add a Player</h3>
+      <label for="playerName">Player Name:</label>
+      <input type="text" id="playerName" name="name" required />
+      <button type="submit">Add Player</button>
+    </form>
+
+    <!-- Add Game Result Form -->
+    <form id="addGameForm" action="/api/game" method="POST">
+      <h3>Add a Game Result</h3>
+
+      <label for="player1Id">Player 1:</label>
+      <select id="player1Id" name="p1Id" required >
+        <option value="" disabled selected>Select Player 1</option>
+        <!-- PLAYERS -->
+      </select>
+      
+      <label for="player2Id">Player 2:</label>
+      <select id="player2Id" name="p2Id" required >
+        <option value="" disabled selected>Select Player 1</option>
+        <!-- PLAYERS -->
+      </select>
+
+      <lable for="gameResult">Game result</lable>
+      <select id="gameResult" name="outcome" required>
+        <option value="" disabled selected>Select game result</option>
+        <option value="p1win">Player 1 wins</option>
+        <option value="p2win">Player 2 wins</option>
+        <option vlaue="draw">Draw</option>
+      </select>
+
+      <button type="submit">Submit Result</button>
+
+    </form>
   </body>
 </html>
