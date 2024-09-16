@@ -5,6 +5,12 @@
   --col-main3: rgb(250, 188, 188);
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
@@ -12,7 +18,7 @@ body {
   padding: 20px;
 }
 
-h1, h2 {
+h1 {
   text-align: center;
   color: #333;
 }
@@ -22,16 +28,12 @@ h1 {
   margin-bottom: 20px;
 }
 
-h2 {
-  font-size: 1.5em;
-  margin-bottom: 15px;
-}
-
 .card {
-  /* background-color: #fff; */
-  padding: 20px;
+  background-color: #fff;
+  padding: 6px;
   margin-bottom: 20px;
   border-radius: 8px;
+  overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   /* margin: 0 auto 20px; */
 }
@@ -83,19 +85,25 @@ button[type="submit"]:hover {
 
 /* Table styling */
 table {
-  width: 100%;
+  /* width: 100%; */
   border-collapse: collapse;
   font-size: 1em;
   text-align: left;
+  /* for colum highlighting */
   overflow: hidden;
   position: relative;
   background-color: #dddddd;
   z-index: 0;
+  border-radius: 16px;
+}
+
+table td {
+  text-align: center;
 }
 
 table th,
 table td {
-  padding: 12px 15px;
+  padding: 9px 12px;
   border: 3px solid white;
 }
 
@@ -104,15 +112,28 @@ table th {
   color: white;
 }
 
+thead tr {
+  background-color: var(--col-main);
+}
+
+th.rotate {
+  height: 140px;
+  white-space: nowrap;
+  width: 25px;
+
+  > div {
+    transform: translate(0%, 45px) rotate(-90deg);
+    width: 25px;
+  }
+}
+
 table tr:hover {
   background-color: var(--col-main3);
 }
 
-table td {
-  text-align: center;
-}
-
-td, th {
+/* colum hover */
+td,
+th {
   position: relative;
 }
 
@@ -129,8 +150,8 @@ td:hover::after {
 
 /* Responsive design */
 @media (max-width: 600px) {
-  form, table {
+  form,
+  table {
     width: 100%;
-    box-sizing: border-box;
   }
 }

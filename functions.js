@@ -7,11 +7,11 @@ import { readFileSync, writeFileSync } from "fs";
  * @returns {string} - html table
  */
 export function getTable(match) {
-  let ret = "<table><tr><th> </th>";
+  let ret = `<table><thead><tr><th></th>`;
   for (const player of match.players) {
-    ret += `<th>${player.name}</th>`;
+    ret += `<th class="rotate"><div><span>${player.name}</span></div></th>`;
   }
-  ret += "</tr>";
+  ret += "</tr></thead> <tbody>";
   for (const playerRow of match.players) {
     ret += `<tr><th>${playerRow.name}</th>`;
     for (const playerColum of match.players) {
@@ -31,7 +31,7 @@ export function getTable(match) {
     }
     ret += `</tr>`;
   }
-  ret += "</table>";
+  ret += "</tbody></table>";
   return ret;
 }
 
