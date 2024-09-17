@@ -6,7 +6,7 @@ import { readFileSync, writeFileSync } from "fs";
  * @param {Match} match - Match object
  * @returns {string} - html table
  */
-export function getTable(match) {
+export function genScoreTable(match) {
   let ret = `<table><thead><tr><th></th>`;
   for (const player of match.players) {
     ret += `<th class="rotate">${player.name}</th>`;
@@ -43,11 +43,25 @@ export function getTable(match) {
  * @param {Match} match - Match object
  * @returns {string} - List of players as option for form
  */
-export function getPlayers(match) {
+export function genPlayersOptions(match) {
   let ret = "";
   for (const player of match.players) {
     ret += `<option value="${player.id}">${player.name}</option>`;
   }
+  return ret;
+}
+
+/**
+ * 
+ * @param {Match} match - Match object
+ * @returns {string} - List of games played
+ */
+export function genGameList(match) {
+  let ret = '<table class="gamelist"><thead><tr><th>White</th><th>Black</th><th>Score</th><th>Date played</th></tr></thead><tbody>';
+  for (const game of match.games) {
+    ret += `<tr><td>${game.p1.name}</td><td>${game.p2.name}</td><td>${game.p1Score}-${game.p2Score}<td></td></td>`
+  }
+  ret += `</tbody></table>`;
   return ret;
 }
 

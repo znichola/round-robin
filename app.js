@@ -1,8 +1,8 @@
 import express from "express";
 import path from "path";
 import { Player, Game, Match } from "./models.js";
-import { getPlayers, getTable, loadMatch, saveMatch } from "./functions.js";
-import { readFileSync, writeFileSync, writeSync } from "fs";
+import { genPlayersOptions, genScoreTable, genGameList, loadMatch, saveMatch } from "./functions.js";
+import { readFileSync } from "fs";
 
 const app = express();
 const port = 5555;
@@ -106,7 +106,7 @@ app.post("/api/game", (req, res) => {
 });
 
 app.get("/api/table", (req, res) => {
-  res.send(getTable(match));
+  res.send(genScoreTable(match));
 });
 
 app.get("/api/match", (req, res) => {
@@ -134,9 +134,9 @@ app.get("/", (req, res) => {
     return;
   }
   const homeHTML = readFileSync(homeTemplate, 'utf8'); // added only for testing
-  let html = homeHTML.replace("<!-- TABLE -->", getTable(match));
-  const players = getPlayers(match);
-  html = html.replaceAll("<!-- PLAYERS -->", players);
+  let html = homeHTML.replace("<!-- TABLE -->", genScoreTable(match));
+  html = html.replaceAll("<!-- PLAYERS -->", genPlayersOptions(match));
+  // html = html.replace("<!-- GAMELIST -->", genGameList(match));
   res.send(html);
 });
 

@@ -30,7 +30,7 @@ h1 {
 
 h2 {
   font-size: 1.2em;
-  margin: 0 0 1.5rem;
+  margin: 0 0 1.4rem;
 }
 
 .center {
@@ -45,6 +45,7 @@ h2 {
   align-items: flex-start;
 }
 
+/* Card */
 .card {
   background-color: #fff;
   padding: 6px;
@@ -52,6 +53,10 @@ h2 {
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: fit-content;
+}
+
+div.card > h2 {
+  margin: 14px 14px 1.5rem;
 }
 
 
@@ -99,6 +104,11 @@ button[type="submit"]:hover {
 }
 
 /* Table styling */
+
+table.gamelist {
+  background-color: white;
+}
+
 table {
   /* width: 100%; */
   border-collapse: collapse;
