@@ -34,12 +34,8 @@ app.get("/hello", (req, res) => {
 });
 
 app.get("/api", (req, res) => {
-  res.json({ message: "Round Robin api, it's simples." });
-});
-
-app.get("/api/newgame", (req, res) => {
-  match = new Match([]);
-  res.json({ message: "Sucess, old game removed, new match initialised" });
+  const routes = app._router.stack.filter(r => r.route).map(r => `${r.route.stack[0].method} ${r.route.path}`)
+  res.json({ message: "Round Robin api:", routes: routes });
 });
 
 app.get("/api/player", (req, res) => {
@@ -110,12 +106,21 @@ app.get("/api/table", (req, res) => {
   res.send(getTable(match));
 });
 
-app.post("/api/save", (req, res) => {
+app.get("/api/match", (req, res) => {
+  res.json({ message: "Success, match retrieved", match: match });
+})
+
+app.post("/api/match/new", (req, res) => {
+  match = new Match([]);
+  res.json({ message: "Sucess, old game removed, new match initialised" });
+});
+
+app.post("/api/match/save", (req, res) => {
   saveMatch("save.json", match);
   res.json({ message: `Saved to ./${saveFile}` });
 });
 
-app.post("/api/load", (req, res) => {
+app.post("/api/match/load", (req, res) => {
   res.json({ message: "Success, file loaded", match: loadMatch(saveFile) });
 });
 
