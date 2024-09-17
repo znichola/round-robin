@@ -124,7 +124,8 @@ app.post("/api/match/save", (req, res) => {
 });
 
 app.post("/api/match/load", (req, res) => {
-  res.json({ message: "Success, file loaded", match: loadMatch(saveFile) });
+  match = loadMatch(saveFile)
+  res.json({ message: "Success, file loaded", match: match });
 });
 
 app.get("/", (req, res) => {
