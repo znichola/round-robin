@@ -12,7 +12,6 @@
   "author": "Nicholas Zivkovic",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.21.0",
-    "htmx.org": "^1.9.12"
+    "express": "^4.21.0"
   }
 }

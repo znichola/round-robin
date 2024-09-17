@@ -7,7 +7,7 @@ Built [expressjs](https://expressjs.com/) as a erver, string methods for templat
 ## Launch it
 
 ```bash
-npm install # install node depencancies
+docker compose scibeta-chess npm i # install node depencancies
 docker compose up -d # launch in detached mode
 ```
 
