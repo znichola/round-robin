@@ -2,7 +2,14 @@
 
 A simple round-robin score sheet for the office chess tournament.
 
-Built [expressjs](https://expressjs.com/) as a erver, string methods for templating, and a js object as a DB. 
+Built [expressjs](https://expressjs.com/) as a erver, string methods for templating, and a js object as a DB.
+
+## Launch it
+
+```bash
+npm install # install node depencancies
+docker compose up -d # launch in detached mode
+```
 
 ## TODO
 
@@ -13,5 +20,5 @@ Built [expressjs](https://expressjs.com/) as a erver, string methods for templat
 - [x] make endpoint to clear the match
 - [x] styling
 - [x] form actions to add player
-- [x] form actions to add game 
+- [x] form actions to add game
 - [ ] admin pannel form actions, delete player/game create new match

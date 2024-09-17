@@ -54,13 +54,15 @@ app.post("/api/player", (req, res) => {
   }
   const player = match.addPlayer(playerName);
 
-  // Sucess redirect to the original page, so it's 
+  saveMatch("save.json", match);
+  // Sucess redirect to the original page, so it's frefreshed automatically
   res.redirect('back');
 });
 
 app.delete("/api/player/:id", (req, res) => {
   try {
     match.removePlayer(req.params.id);
+    saveMatch("save.json", match);
     res.json({ message: "Sucess, player removed" });
   } catch (error) {
     res.status(404).json({ message: "Error, player not found" });
@@ -96,6 +98,7 @@ app.post("/api/game", (req, res) => {
 
   try {
     match.addGame(p1Id, p2Id, p1Score, p2Score);
+    saveMatch("save.json", match);
     res.redirect("back");
   } catch (error) {
     res.status(404).json({ message: error.message });

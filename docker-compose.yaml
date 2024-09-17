@@ -1,0 +1,19 @@
+services:
+    scibeta-chess:
+        container_name: scibeta-chess
+        image: node:22-alpine
+        restart: always
+        networks:
+          - tools_network
+        ports:
+          - 5555:5555
+        volumes:
+          - ./:/app
+        working_dir: /app
+        command: app.js
+        init: true # so it stops immediatly on crtl+c
+
+networks:
+    tools_network:
+        name: tools_network
+        external: true
