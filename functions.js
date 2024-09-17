@@ -11,9 +11,11 @@ export function getTable(match) {
   for (const player of match.players) {
     ret += `<th class="rotate">${player.name}</th>`;
   }
-  ret += "</tr></thead> <tbody>";
+  ret += `<th class="total">wins</th></tr></thead> <tbody>`;
   for (const playerRow of match.players) {
     ret += `<tr><th>${playerRow.name}</th>`;
+    let playerWins = 0;
+    let playerTotal = 0;
     for (const playerColum of match.players) {
       let data = "";
       if (playerRow.id === playerColum.id) {
@@ -22,14 +24,15 @@ export function getTable(match) {
         const game = match.getGame(playerRow.id, playerColum.id);
         if (game !== undefined) {
           data = game.p1.id === playerRow.id ? game.p1Score : game.p2Score;
-          // data = `${game.p1.name} ${game.p1Score} - ${game.p2Score} ${game.p2.name}`;
+          playerWins += Number(data);
+          playerTotal += 1;
         } else {
           data = " ";
         }
       }
       ret += `<td>${data}</td>`
     }
-    ret += `</tr>`;
+    ret += `<td class="total">${playerWins}/${playerTotal}</td></tr>`;
   }
   ret += "</tbody></table>";
   return ret;

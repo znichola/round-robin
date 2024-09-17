@@ -1,53 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Round robin chess tournament | Scibeta</title>
-    <link rel="stylesheet" href="/styles.css" />
-  </head>
-  <body>
-    <h1>Scibeta chess tournament</h1>
-    <div class="card center">
-      <!-- TABLE -->
-    </div>
 
-    <div class="flex-stuff">
-      <!-- Add Player Form -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Round robin chess tournament | Scibeta</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♟️</text></svg>" />
+</head>
 
-      <form class="card" id="addPlayerForm" action="/api/player" method="POST">
-        <h2>Add a player</h2>
-        <label for="playerName">Player Name:</label>
-        <input type="text" id="playerName" name="name" required />
-        <button type="submit">Add Player</button>
-      </form>
+<body>
+  <h1>Scibeta chess tournament</h1>
+  <div class="card center">
+    <!-- TABLE -->
+  </div>
 
-      <!-- Add Game Result Form -->
-      <form class="card" id="addGameForm" action="/api/game" method="POST">
-        <h2>Add a game result</h2>
+  <div class="flex-stuff">
+    <!-- Add Player Form -->
 
-        <label for="player1Id">Player 1:</label>
-        <select id="player1Id" name="p1Id" required>
-          <option value="" disabled selected>Select Player 1</option>
-          <!-- PLAYERS -->
-        </select>
+    <form class="card" id="addPlayerForm" action="/api/player" method="POST">
+      <h2>Add a player</h2>
+      <label for="playerName">Player Name:</label>
+      <input type="text" id="playerName" name="name" required />
+      <button type="submit">Add Player</button>
+    </form>
 
-        <label for="player2Id">Player 2:</label>
-        <select id="player2Id" name="p2Id" required>
-          <option value="" disabled selected>Select Player 1</option>
-          <!-- PLAYERS -->
-        </select>
+    <!-- Add Game Result Form -->
+    <form class="card" id="addGameForm" action="/api/game" method="POST">
+      <h2>Add a game result</h2>
 
-        <lable for="gameResult">Game result</lable>
-        <select id="gameResult" name="outcome" required>
-          <option value="" disabled selected>Select game result</option>
-          <option value="p1win">Player 1 wins</option>
-          <option value="p2win">Player 2 wins</option>
-          <option vlaue="draw">Draw</option>
-        </select>
+      <label for="player1Id">Player 1:</label>
+      <select id="player1Id" name="p1Id" required>
+        <option value="" disabled selected>Select Player 1</option>
+        <!-- PLAYERS -->
+      </select>
 
-        <button type="submit">Submit Result</button>
-      </form>
-    </div>
-  </body>
+      <label for="player2Id">Player 2:</label>
+      <select id="player2Id" name="p2Id" required>
+        <option value="" disabled selected>Select Player 1</option>
+        <!-- PLAYERS -->
+      </select>
+
+      <lable for="gameResult">Game result</lable>
+      <select id="gameResult" name="outcome" required>
+        <option value="" disabled selected>Select game result</option>
+        <option value="p1win">Player 1 wins</option>
+        <option value="p2win">Player 2 wins</option>
+        <option vlaue="draw">Draw</option>
+      </select>
+
+      <button type="submit">Submit Result</button>
+    </form>
+  </div>
+</body>
+
 </html>

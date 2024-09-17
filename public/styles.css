@@ -136,6 +136,14 @@ th.rotate {
   transform: rotate(180deg);
 }
 
+th.total {
+  background-color: var(--col-main2);
+}
+
+.total {
+  background-color: #ff000029;
+}
+
 table tr:hover {
   background-color: var(--col-main3);
 }
@@ -156,6 +164,7 @@ td:hover::after {
   width: 100%;
   z-index: -1;
 }
+
 
 /* Responsive design */
 @media (max-width: 600px) {
