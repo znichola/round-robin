@@ -115,7 +115,7 @@ app.get("/api/match", (req, res) => {
 
 app.post("/api/match/new", (req, res) => {
   match = new Match([]);
-  res.json({ message: "Sucess, old game removed, new match initialised" });
+  res.json({ message: "Success, old game removed, new match initialised" });
 });
 
 app.post("/api/match/save", (req, res) => {

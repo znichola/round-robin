@@ -11,6 +11,17 @@ docker compose scibeta-chess npm i # install node depencancies
 docker compose up -d # launch in detached mode
 ```
 
+## Maintence
+
+There are api routes that are not hooked up to buttons, you can use them with curl:
+
+```bash
+curl -X GET http://localhost:5555/api # gives a list of available routes, not all are tested for all cases
+curl -X GET  http://localhost:5555/api/match
+curl -X POST http://localhost:5555/api/match/save
+curl -X POST http://localhost:5555/api/match/load
+```
+
 ## TODO
 
 - [x] decide on datastructure
