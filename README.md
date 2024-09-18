@@ -8,7 +8,8 @@ Built [expressjs](https://expressjs.com/) as a erver, string methods for templat
 
 ```bash
 docker compose scibeta-chess npm i # install node depencancies
-docker compose up -d # launch in detached mode
+docker compose up -d               # launch in detached mode
+docker copmose restart             # after changes use this to reload
 ```
 
 ## Maintence
