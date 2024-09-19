@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import { Player, Game, Match } from "./models.js";
-import { genPlayersOptions, genScoreTable, genGameList, loadMatch, saveMatch } from "./functions.js";
+import { genPlayersOptions, genScoreTable, genGameList, loadMatch, saveMatch, calcPerfRank } from "./functions.js";
 import { readFileSync } from "fs";
 
 const app = express();
