@@ -183,3 +183,31 @@ td:hover::after {
     width: 100%;
   }
 }
+
+.perf {
+  padding: 0;
+  position: realtive;
+
+  button {
+    display: block;
+    height: 100%;
+    width: 100%;
+    background-color: inherit;
+    border: none;
+    font: inherit;
+    color: inherit;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+
+  button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    text-decoration: underline;
+  }
+}
+
+.popover {
+  max-width: 40rem;
+  padding: 0 1rem;
+}

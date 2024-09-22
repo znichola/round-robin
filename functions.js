@@ -11,7 +11,9 @@ export function genScoreTable(match) {
   for (const player of match.players) {
     ret += `<th class="rotate">${player.name}</th>`;
   }
-  ret += `<th class="total">wins</th></tr></thead> <tbody>`;
+  ret += `<th class="total">Score</th><th class=perf><button popovertarget="pef-text" popovertargetaction="toggle">
+   Perf.</br>rating  
+  </button></th></tr></thead> <tbody>`;
   for (const playerRow of match.players) {
     ret += `<tr><th>${playerRow.name}</th>`;
     let playerWins = 0;
@@ -79,11 +81,9 @@ export function calcPerfRank(opponentRatings, playerScore) {
     return NaN;
   }
 
-  if (playerScore === 0) {
+  if (playerScore === 0 || playerScore === opponentRatings.length) {
     opponentRatings.push(1000);
-    playerScore = 0;
-  } else if (playerScore === opponentRatings.length) {
-    opponentRatings.push(1000);
+    playerScore += 0.4;
   }
 
   /**
@@ -94,7 +94,7 @@ export function calcPerfRank(opponentRatings, playerScore) {
    */
   function expected_score(ors, own) {
     return ors.reduce((prev, op, _1) => prev + (1 / (1 + Math.pow(10, (op - own) / 400))), 0);
-  } 
+  }
 
   let lo = 0;
   let hi = 4000;

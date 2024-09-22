@@ -1,61 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Round robin chess tournament | Scibeta</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♟️</text></svg>"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Round robin chess tournament | Scibeta</title>
-  <link rel="stylesheet" href="/styles.css" />
-  <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♟️</text></svg>" />
-</head>
+  <body>
+    <h1>Scibeta chess tournament</h1>
 
-<body>
-  <h1>Scibeta chess tournament</h1>
-  <div class="card center">
-    <!-- TABLE -->
-  </div>
+    <div class="card center">
+      <!-- TABLE -->
+    </div>
 
-  <div class="flex-stuff">
+    <div class="flex-stuff">
+      <form class="card" id="addPlayerForm" action="/api/player" method="POST">
+        <h2>Add a player</h2>
+        <label for="playerName">Player Name:</label>
+        <input type="text" id="playerName" name="name" required />
+        <button type="submit">Add Player</button>
+      </form>
 
-    <form class="card" id="addPlayerForm" action="/api/player" method="POST">
-      <h2>Add a player</h2>
-      <label for="playerName">Player Name:</label>
-      <input type="text" id="playerName" name="name" required />
-      <button type="submit">Add Player</button>
-    </form>
+      <form class="card" id="addGameForm" action="/api/game" method="POST">
+        <h2>Add a game result</h2>
 
-    <form class="card" id="addGameForm" action="/api/game" method="POST">
-      <h2>Add a game result</h2>
+        <label for="player1Id">Player 1:</label>
+        <select id="player1Id" name="p1Id" required>
+          <option value="" disabled selected>Select Player 1</option>
+          <!-- PLAYERS -->
+        </select>
 
-      <label for="player1Id">Player 1:</label>
-      <select id="player1Id" name="p1Id" required>
-        <option value="" disabled selected>Select Player 1</option>
-        <!-- PLAYERS -->
-      </select>
+        <label for="player2Id">Player 2:</label>
+        <select id="player2Id" name="p2Id" required>
+          <option value="" disabled selected>Select Player 1</option>
+          <!-- PLAYERS -->
+        </select>
 
-      <label for="player2Id">Player 2:</label>
-      <select id="player2Id" name="p2Id" required>
-        <option value="" disabled selected>Select Player 1</option>
-        <!-- PLAYERS -->
-      </select>
+        <label for="gameResult">Game result</label>
+        <select id="gameResult" name="outcome" required>
+          <option value="" disabled selected>Select game result</option>
+          <option value="p1win">Player 1 wins</option>
+          <option value="p2win">Player 2 wins</option>
+          <option value="draw">Draw</option>
+        </select>
 
-      <label for="gameResult">Game result</label>
-      <select id="gameResult" name="outcome" required>
-        <option value="" disabled selected>Select game result</option>
-        <option value="p1win">Player 1 wins</option>
-        <option value="p2win">Player 2 wins</option>
-        <option value="draw">Draw</option>
-      </select>
+        <button type="submit">Submit Result</button>
+      </form>
 
-      <button type="submit">Submit Result</button>
-    </form>
-    
-    <!-- <div class="card"> -->
+      <!-- <div class="card"> -->
       <!-- <h2>Game list</h2> -->
       <!-- GAMELIST -->
-    <!-- </div> -->
-  </div>
-</body>
+      <!-- </div> -->
+    </div>
+  </body>
 
+  <div id="pef-text" popover class="popover">
+    <h1>Performance rating</h1>
+    <p>
+      Check the wikipedia article on
+      <a href="https://en.wikipedia.org/wiki/Performance_rating_(chess)"
+        >Performance rating (chess)</a
+      >
+      for a detailed overview of how it's calculated, the example python code is
+      used as reference.
+    </p>
+    <p>
+      The only modification is how the 0 and max score are handled, if 0 or
+      <img
+        src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c26c105004f30c27aa7c2a9c601550a4183b1f21"
+        aria-hidden="true"
+        style="vertical-align: -0.338ex; width: 2.324ex; height: 1.676ex"
+        alt="{\displaystyle \infty }"
+      />
+      then an additional fictitious game is added where the player scores 0.4
+      points.
+    </p>
+    <p>
+      This ensures there is always a number to show, and if they draw on
+      the next game, the new score will be a higher.
+    </p>
+    <p>
+      <em
+        >I'm not a maths guy, someone from research should come up with this.</em
+      >
+    </p>
+  </div>
 </html>
